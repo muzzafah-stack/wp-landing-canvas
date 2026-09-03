@@ -1,0 +1,310 @@
+/**
+ * WP LandingCanvas — Modern 2026 Admin UI Styles
+ *
+ * @package WP_LandingCanvas
+ * @version 1.0.0
+ */
+
+/* Container Wrap */
+.wplc-meta-box-wrap {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 16px 20px;
+	margin-top: 6px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+	box-sizing: border-box;
+}
+
+.wplc-meta-box-wrap * {
+	box-sizing: border-box;
+}
+
+/* Header & Switcher */
+.wplc-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #f1f5f9;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.wplc-toggle-group {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+/* Modern iOS/Vercel Style Switch */
+.wplc-switch {
+	position: relative;
+	display: inline-block;
+	width: 52px;
+	height: 28px;
+	flex-shrink: 0;
+}
+
+.wplc-switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
+}
+
+.wplc-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #cbd5e1;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 34px;
+}
+
+.wplc-slider:before {
+	position: absolute;
+	content: "";
+	height: 22px;
+	width: 22px;
+	left: 3px;
+	bottom: 3px;
+	background-color: #ffffff;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.wplc-switch input:checked + .wplc-slider {
+	background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+}
+
+.wplc-switch input:focus + .wplc-slider {
+	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.wplc-switch input:checked + .wplc-slider:before {
+	transform: translateX(24px);
+}
+
+/* Toggle Info */
+.wplc-toggle-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.wplc-toggle-title {
+	font-size: 15px;
+	font-weight: 600;
+	color: #0f172a;
+	cursor: pointer;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.wplc-toggle-desc {
+	font-size: 12px;
+	color: #64748b;
+	margin: 2px 0 0 0;
+	line-height: 1.4;
+}
+
+/* Actions & Badges */
+.wplc-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.wplc-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 9999px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.wplc-badge-active {
+	background-color: #ecfdf5;
+	color: #059669;
+	border: 1px solid #a7f3d0;
+}
+
+.wplc-badge-inactive {
+	background-color: #f1f5f9;
+	color: #64748b;
+	border: 1px solid #e2e8f0;
+}
+
+.wplc-btn-preview {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #f8fafc !important;
+	border-color: #cbd5e1 !important;
+	color: #334155 !important;
+	border-radius: 6px !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	padding: 4px 12px !important;
+	transition: all 0.2s ease;
+}
+
+.wplc-btn-preview:hover {
+	background: #e2e8f0 !important;
+	color: #0f172a !important;
+}
+
+/* Alert Notices */
+.wplc-alert {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 14px;
+	border-radius: 8px;
+	font-size: 13px;
+	margin-top: 14px;
+}
+
+.wplc-alert-warning {
+	background-color: #fffbeb;
+	color: #92400e;
+	border: 1px solid #fde68a;
+}
+
+/* Editor Panel & Transition */
+.wplc-editor-panel {
+	margin-top: 16px;
+	transition: opacity 0.25s ease, max-height 0.25s ease;
+}
+
+.wplc-hidden {
+	display: none !important;
+}
+
+/* Tabs Navigation */
+.wplc-tabs-nav {
+	display: flex;
+	gap: 4px;
+	border-bottom: 1px solid #e2e8f0;
+	padding-bottom: 0;
+	margin-bottom: 16px;
+	overflow-x: auto;
+}
+
+.wplc-tab-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: transparent;
+	border: none;
+	border-bottom: 2px solid transparent;
+	color: #64748b;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 10px 14px;
+	cursor: pointer;
+	border-radius: 6px 6px 0 0;
+	transition: all 0.15s ease;
+	white-space: nowrap;
+}
+
+.wplc-tab-btn .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+.wplc-tab-btn:hover {
+	color: #1e293b;
+	background-color: #f8fafc;
+}
+
+.wplc-tab-btn.active {
+	color: #4f46e5;
+	border-bottom-color: #4f46e5;
+	font-weight: 600;
+	background-color: #f5f3ff;
+}
+
+/* Tab Contents */
+.wplc-tab-content {
+	display: none;
+}
+
+.wplc-tab-content.active {
+	display: block;
+	animation: wplcFadeIn 0.2s ease-out;
+}
+
+@keyframes wplcFadeIn {
+	from { opacity: 0; transform: translateY(2px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.wplc-tab-helper {
+	margin-bottom: 10px;
+}
+
+.wplc-tab-helper p {
+	font-size: 12px;
+	color: #64748b;
+	margin: 0;
+}
+
+/* CodeMirror Wrapper Adjustments */
+.wplc-meta-box-wrap .CodeMirror {
+	border: 1px solid #cbd5e1;
+	border-radius: 8px;
+	font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	font-size: 13px;
+	line-height: 1.5;
+	min-height: 380px;
+	height: auto;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.wplc-meta-box-wrap .CodeMirror-scroll {
+	min-height: 380px;
+}
+
+.wplc-meta-box-wrap .CodeMirror-focused {
+	border-color: #6366f1;
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Plain textarea fallback if CodeMirror disabled */
+.wplc-code-editor {
+	width: 100%;
+	font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	font-size: 13px;
+	border: 1px solid #cbd5e1;
+	border-radius: 8px;
+	padding: 12px;
+	background: #fafafa;
+}
+
+/* Footer Bar */
+.wplc-footer-bar {
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px solid #f1f5f9;
+}
+
+.wplc-tip {
+	font-size: 12px;
+	color: #64748b;
+	display: block;
+	line-height: 1.4;
+}
+
+.wplc-tip strong {
+	color: #334155;
+}
