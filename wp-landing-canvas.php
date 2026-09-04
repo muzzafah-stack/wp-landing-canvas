@@ -137,6 +137,7 @@ final class WP_LandingCanvas {
 		require_once WPLC_PLUGIN_DIR . 'includes/class-wplc-admin.php';
 		require_once WPLC_PLUGIN_DIR . 'includes/class-wplc-assets.php';
 		require_once WPLC_PLUGIN_DIR . 'includes/class-wplc-renderer.php';
+		require_once WPLC_PLUGIN_DIR . 'includes/class-wplc-seo.php';
 	}
 
 	/**
@@ -163,6 +164,7 @@ final class WP_LandingCanvas {
 		WPLC_Admin::init();
 		WPLC_Assets::init();
 		WPLC_Renderer::init();
+		WPLC_SEO::init();
 	}
 
 	/**

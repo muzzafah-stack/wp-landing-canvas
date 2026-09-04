@@ -27,7 +27,12 @@ $footer_scripts = get_post_meta( $post_id, WPLC_Admin::META_FOOTER_SCRIPTS, true
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	
 	<?php
-	// Essential WordPress SEO, OpenGraph, Canonical, and Resource Hook.
+	// Fallback title if current theme does not support title-tag and no SEO plugin has outputted it.
+	if ( ! current_theme_supports( 'title-tag' ) ) {
+		echo '<title>' . esc_html( wp_get_document_title() ) . '</title>' . "\n\t";
+	}
+
+	// Essential WordPress SEO, OpenGraph, Canonical, Schema, and Resource Hook.
 	wp_head();
 	?>
 

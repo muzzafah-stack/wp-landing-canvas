@@ -2,15 +2,93 @@
  * WP LandingCanvas — Admin Editor & CodeMirror Controller
  *
  * @package WP_LandingCanvas
- * @version 1.0.0
+ * @version 1.1.0
  */
 
-/* global jQuery, wp, wplcSettings */
+/* global jQuery, wp, wplcSettings, YoastSEO */
 (function ($) {
 	'use strict';
 
 	$(document).ready(function () {
 		var editors = {};
+
+		/**
+		 * Helper to check if Canvas mode is enabled.
+		 */
+		function isCanvasEnabled() {
+			return $('#wplc-enable-canvas').is(':checked');
+		}
+
+		/**
+		 * Helper to get current HTML content (from CodeMirror or textarea).
+		 */
+		function getCanvasHtmlContent() {
+			if (editors.html && editors.html.codemirror) {
+				return editors.html.codemirror.getValue();
+			}
+			var $htmlArea = $('#wplc_html_content');
+			return $htmlArea.length ? $htmlArea.val() : '';
+		}
+
+		/**
+		 * Debounced notifier for active SEO plugins (Rank Math, Yoast SEO, etc.).
+		 */
+		var seoRefreshTimer = null;
+		function triggerSeoRefresh() {
+			clearTimeout(seoRefreshTimer);
+			seoRefreshTimer = setTimeout(function () {
+				// Rank Math real-time analysis refresh
+				if (typeof wp !== 'undefined' && wp.hooks && typeof wp.hooks.doAction === 'function') {
+					wp.hooks.doAction('rank_math_content_changed');
+					wp.hooks.doAction('rank_math_refresh_content_analysis');
+				}
+
+				// Yoast SEO real-time analysis refresh
+				if (typeof YoastSEO !== 'undefined' && YoastSEO.app && typeof YoastSEO.app.pluginReloaded === 'function') {
+					YoastSEO.app.pluginReloaded('wplcSeoPlugin');
+				}
+			}, 300);
+		}
+
+		/**
+		 * Register SEO bridge hooks for Rank Math and Yoast SEO.
+		 */
+		function initSeoBridge() {
+			// 1. Rank Math Integration
+			if (typeof wp !== 'undefined' && wp.hooks && typeof wp.hooks.addFilter === 'function') {
+				wp.hooks.addFilter('rank_math_content', 'wplc', function (content) {
+					if (isCanvasEnabled()) {
+						var canvasHtml = getCanvasHtmlContent();
+						return canvasHtml !== '' ? canvasHtml : content;
+					}
+					return content;
+				});
+			}
+
+			// 2. Yoast SEO Integration
+			function registerYoastPlugin() {
+				if (typeof YoastSEO !== 'undefined' && YoastSEO.app && typeof YoastSEO.app.registerPlugin === 'function') {
+					try {
+						YoastSEO.app.registerPlugin('wplcSeoPlugin', { status: 'ready' });
+						YoastSEO.app.registerModification('content', function (content) {
+							if (isCanvasEnabled()) {
+								var canvasHtml = getCanvasHtmlContent();
+								return canvasHtml !== '' ? canvasHtml : content;
+							}
+							return content;
+						}, 'wplcSeoPlugin', 5);
+					} catch (e) {
+						// Fail gracefully if already registered
+					}
+				}
+			}
+
+			if (typeof YoastSEO !== 'undefined' && YoastSEO.app && YoastSEO.app.isLoaded) {
+				registerYoastPlugin();
+			} else {
+				$(window).on('YoastSEO:ready', registerYoastPlugin);
+			}
+		}
 
 		/**
 		 * Initialize WordPress Native CodeMirror on textareas.
@@ -24,7 +102,17 @@
 			var $htmlArea = $('#wplc_html_content');
 			if ($htmlArea.length) {
 				editors.html = wp.codeEditor.initialize($htmlArea, wplcSettings.cmHtml || {});
+				if (editors.html && editors.html.codemirror) {
+					editors.html.codemirror.on('change', function () {
+						triggerSeoRefresh();
+					});
+				}
 			}
+
+			// Raw textarea change fallback
+			$htmlArea.on('input change', function () {
+				triggerSeoRefresh();
+			});
 
 			// Custom CSS Editor
 			var $cssArea = $('#wplc_custom_css');
@@ -65,6 +153,9 @@
 				$panel.addClass('wplc-hidden');
 				$badge.removeClass('wplc-badge-active').addClass('wplc-badge-inactive').text(wplcSettings.i18n.disabled);
 			}
+
+			// Trigger SEO recalculation on mode switch
+			triggerSeoRefresh();
 		});
 
 		/**
@@ -110,7 +201,8 @@
 			}
 		}
 
-		// Initialize all editors on page load
+		// Initialize all editors and SEO bridge on page load
 		initCodeEditors();
+		initSeoBridge();
 	});
 })(jQuery);

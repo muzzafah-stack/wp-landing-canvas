@@ -51,7 +51,7 @@ class WPLC_Assets {
 		wp_enqueue_script(
 			'wplc-admin-editor',
 			WPLC_PLUGIN_URL . 'assets/js/admin-editor.js',
-			array( 'jquery' ),
+			array( 'jquery', 'wp-hooks' ),
 			WPLC_VERSION,
 			true
 		);
