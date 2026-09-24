@@ -6,9 +6,10 @@ WP LandingCanvas lets you create lightweight, full-page WordPress landing pages 
 
 - **Author**: Hipnolink Digital Team ([www.hipnolink.com](https://www.hipnolink.com))
 - **Plugin URI**: [https://github.com/muzzafah-stack](https://github.com/muzzafah-stack)
-- **Version**: 1.0.0
-- **Requires at least**: WordPress 7.0+
-- **Requires PHP**: 8.2+
+- **Version**: 1.1.0
+- **Requires at least**: WordPress 6.0+
+- **Tested up to**: WordPress 7.1.2
+- **Requires PHP**: 7.4+
 - **License**: GPL v2 or later
 
 ---

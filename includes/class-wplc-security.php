@@ -23,13 +23,6 @@ class WPLC_Security {
 	const NONCE_NAME = 'wplc_canvas_nonce';
 
 	/**
-	 * Initialize security hooks.
-	 */
-	public static function init() {
-		// No runtime hooks required currently; helper class.
-	}
-
-	/**
 	 * Verify nonce from request.
 	 *
 	 * @return bool True if valid, false otherwise.

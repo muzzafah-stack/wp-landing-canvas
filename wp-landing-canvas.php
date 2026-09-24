@@ -3,9 +3,10 @@
  * Plugin Name:       WP LandingCanvas
  * Plugin URI:        https://github.com/muzzafah-stack
  * Description:       WP LandingCanvas lets you create lightweight, full-page WordPress landing pages using your own HTML—without relying on heavy page builders.
- * Version:           1.0.0
- * Requires at least: 7.0
- * Requires PHP:      8.2
+ * Version:           1.1.0
+ * Requires at least: 6.0
+ * Tested up to:      7.1.2
+ * Requires PHP:      7.4
  * Author:            Hipnolink Digital Team
  * Author URI:        https://www.hipnolink.com
  * License:           GPL v2 or later
@@ -30,21 +31,21 @@ final class WP_LandingCanvas {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.1.0';
 
 	/**
 	 * Minimum PHP version required.
 	 *
 	 * @var string
 	 */
-	const MIN_PHP_VERSION = '8.2';
+	const MIN_PHP_VERSION = '7.4';
 
 	/**
 	 * Minimum WordPress version required.
 	 *
 	 * @var string
 	 */
-	const MIN_WP_VERSION = '7.0';
+	const MIN_WP_VERSION = '6.0';
 
 	/**
 	 * Singleton instance.
@@ -160,7 +161,6 @@ final class WP_LandingCanvas {
 		);
 
 		// Initialize components.
-		WPLC_Security::init();
 		WPLC_Admin::init();
 		WPLC_Assets::init();
 		WPLC_Renderer::init();

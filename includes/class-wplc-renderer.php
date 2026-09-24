@@ -92,6 +92,7 @@ class WPLC_Renderer {
 			get_template() . '-style',
 			'twentytwentyfour-style',
 			'twentytwentyfive-style',
+			'twentytwentysix-style',
 			'astra-theme-css',
 			'generatepress-style',
 			'oceanwp-style',
@@ -113,10 +114,13 @@ class WPLC_Renderer {
 			'bricks-main',
 			'bricks-frontend',
 
-			// Block library (WordPress default blocks)
+			// Block library (WordPress default blocks & FSE supports)
 			'wp-block-library',
 			'wp-block-library-theme',
 			'global-styles',
+			'core-block-supports',
+			'wp-elements',
+			'wp-block-template-skip-link',
 		);
 
 		$styles_to_dequeue = apply_filters( 'wplc_dequeue_style_handles', $default_dequeue_styles );
